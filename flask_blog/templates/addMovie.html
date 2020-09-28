@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+<HTML>
+<head>
+<script>
+function myFunction() {
+	var node = document.createElement("LI");                 // Create a <li> node
+	var textnode = document.createTextNode("helll");         // Create a text node
+	node.appendChild(textnode);                              // Append the text to <li>
+	document.getElementById("actors").appendChild(node);     // Append <li> to <ul> with id="myList"
+}
+</script>
+</head>
+<body>
+{% block body %}
+<form action="{{ url_for('movie') }}" method="post" enctype = "multipart/form-data">
+        <div class="form-group">
+            <input class="form-control" name="title" placeholder="Movie Title">
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="budget" placeholder="Budget">
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="overview" placeholder="overview">
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="director" placeholder="director">
+        </div>
+		<div class="form-group">
+            <select class="form-control" name="country">
+                {% for cnt in cntList %}
+                    <option value="{{ cnt.country_name }}">{{ cnt.country_name }} </option>
+                {% endfor %}
+            </select>
+        </div>
+		<div class="form-group">
+            <input class="form-control" type="date" name="release_date" placeholder="Release Date">
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="revenue" placeholder="Revenue">
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="duration" placeholder="Duration">
+        </div>
+		<div class="form-group">
+            <select class="form-control" name="genre_id">
+                {% for gen in genlist %}
+                    <option value="{{ gen.genre_id }}">{{ gen.genre_name }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="language_id">
+                {% for lan in langlist %}
+                    <option value="{{ lan.language_id }}">{{ lan.language_name }} </option>
+                {% endfor %}
+            </select>
+        </div>
+		<div class="form-group">
+            <input class="form-control" name="tagline" placeholder="Tagline">
+        </div>
+
+		<div class="form-group">
+		Upload image for the Movie:<input type = "file" name = "file" style="margin:10px"/>
+        </div>
+		<div class="form-group">
+            <button class="btn btn-primary">Add Movie</button>
+        </div>
+
+    </form>
+{% endblock %}

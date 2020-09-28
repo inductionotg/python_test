@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block body %}
+{% for mov in movList %}
+	<div class="card-body">
+	<div class="card-image">
+		<img src="../static/{{mov.image}}" align="middle"  />
+	</div>
+	<div class="card-box" style="font-size:16px">
+	<div class="card-title"> Title:{{mov.title}}</div>
+	<p> Budget:{{mov.budget}}</p>
+	<p> Revenue:{{mov.revenue}}</p>
+	<p> Release Date:{{mov.rel_date}}</p>
+	<p> Popularity:{{mov.popularity}} </p>
+	<p> Duration:{{mov.duration}} hours</p>
+	<p> Rating:{{mov.vote_average}} by {{mov.vote_count}} viewers</p>
+	</div>
+	</div>
+	<div class="card-body">
+	<div class="card-title">Overview</div>
+	<p> {{mov.overview}}</p>
+	</div>
+	<div class="card-box" >
+	<form action="{{ url_for('saveComment', mid=mov.movie_id) }}" method="post">
+	Rate the Movie:<select class="form-control" name="rating">
+                    <option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+    </select>
+	Give your comments:<input class="form-control" name="comment" placeholder="Add your comment here!!">
+    <button class="btn">Save Comment</button>
+
+	</form>
+	</div>
+	{% endfor %}
+
+	<div class="card-body" background-color="lilac">
+	<div class="card-title" style="background-color:#09B6B1; color:white; text-shadow:2px; padding:5px;"> Viewer Comments</div>
+	{% for com in comList %}
+
+				<p> <img src='../static/comment.jpg' width="20px" height="20px" />{{com.mcomment}}</p>
+	{% endfor %}
+	</div>
+{% endblock %}
